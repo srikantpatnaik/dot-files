@@ -42,3 +42,21 @@ the end of the file(or wherever) ::
 
 Adding Google Address in mutt
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Install ``goobook`` using pip ::
+
+	sudo pip install goobook
+
+Get authenticated by Google ::
+
+	goobook authenticate
+
+Update your ``.muttrc`` with following content ::
+
+	set query_command="goobook query %s"
+	macro index,pager a "<pipe-message>goobook add<return>" "add sender to google contacts"
+	bind editor <Tab> complete-query
+
+Unlike many posts on internet, you don't need to create any ``.goobookrc`` file.
+Thanks to developers, no more plain text passwords.
+
