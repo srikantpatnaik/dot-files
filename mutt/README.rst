@@ -60,3 +60,12 @@ Update your ``.muttrc`` with following content ::
 Unlike many posts on internet, you don't need to create any ``.goobookrc`` file.
 Thanks to developers, no more plain text passwords.
 
+
+Adding sidebar
+^^^^^^^^^^^^^^
+
+Install ``mutt-patched`` ::
+
+	sudo apt-get install mutt-patched
+
+Locate comments and settings in ``.muttrc`` file.
