@@ -1,3 +1,5 @@
+# My muttrc (care assumed)
+
 set imap_user = 'u.srikant.patnaik@gmail.com'
 
 #set sendmail="/usr/sbin/ssmtp"
@@ -19,7 +21,7 @@ set smtp_url = 'smtp://u.srikant.patnaik@smtp.gmail.com:587/'
 #set smtp_url = 'smtps://u.srikant.patnaik@smtp.gmail.com:485/'
 #set smtp_pass='will be handled by gpg'
 
-set move = no
+set move = yes # Don't ask while moving messages
 set imap_keepalive = 900
 
 # Gmail-style keyboard shortcut
@@ -39,6 +41,7 @@ set trash= +[Gmail]/Trash
 # Cache
 set header_cache= ~/.mutt/cache/headers
 set message_cachedir= ~/.mutt/cache/bodies
+
 set certificate_file= ~/.mutt/certificates
 
 # Gmail style keybindings
@@ -51,10 +54,9 @@ bind  pager       x  tag-message #Select Conversation
 bind  index,pager s  flag-message #Start a message
 macro index,pager +  <save-message>=[Gmail]/Important<enter><enter> "Mark as important"
 macro index,pager !  <save-message>=[Gmail]/Spam<enter><enter> "Report spam"
-bind  index,pager a  group-reply #Reply all
 bind  index,pager \# delete-thread #Delete
 bind  index,pager l  copy-message #Label
-bind  index,pager v  save-message #Move to
+#bind  index,pager v  save-message #Move to
 macro index,pager I  <set-flag>O"Mark as read"
 macro index,pager U  <clear-flag>O"Mark as unread"
 macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>"enter"Go to all mail"
@@ -67,19 +69,176 @@ folder-hook +INBOX 'macro index,pager y "<save-message>=[Gmail]/AllMail<enter><e
 folder-hook +[Gmail]/Trash macro index,pager y <save-message>=INBOX<enter><enter> "Move to inbox"
 folder-hook +[Gmail]/Starred bind  index,pager y flag-message #"Toggle star"
 
+# Normal keybindings, using 'g' conflicts with 'gi' and others
+bind  index,pager R  group-reply #Reply all
+
 # This should be ' »›-‹L' to match Gmail, but $to_chars breaks on unicode.
 set to_chars= ' +>-<L'
 # Don't move read mail.
 set move= no
 
 # Sort by newest conversation first.
-set sort= reverse-threads
-set sort_aux= last-date-received
+#set sort= reverse-threads
+#set sort_aux= last-date-received
 
-# For passwords
+# For passwords ---------------------------------------
 source "gpg -d ~/.mutt/passwords.gpg |"
 
-# Goobook address
+# Goobook address options -----------------------------
 set query_command="goobook query %s"
 macro index,pager a "<pipe-message>goobook add<return>" "add sender to google contacts"
 bind editor <Tab> complete-query
+
+# Mutt color
+source $HOME/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-16.muttrc
+
+# Pager View Options ---------------------------------
+set pager_index_lines = 10 # number of index lines to show
+set pager_context = 3      # number of context lines to show
+set pager_stop             # don't go to next message automatically
+set menu_scroll            # scroll in menus
+set tilde                  # show tildes like in vim
+unset markers              # no ugly plus signs
+
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+alternative_order text/plain text/enriched text/html
+
+# URL View options ------------------------------------
+macro pager \Cu "|urlview<enter>" "call urlview to open links"
+
+# Compose View options --------------------------------
+set fast_reply # skip to compose when replying
+set fcc_attach # save attachments with the body
+
+# But do not ask before exiting mutt
+#set quit=ask-yes
+set quit=yes
+
+# Don't ask if I want to purge deleted messages, just do it
+set delete=yes
+
+# Use ASCII instead of weird arrows for threads
+set ascii_chars = yes
+
+# Scroll rather than page
+set menu_scroll = yes
+
+# Colour URLs in mails
+color body blue default "(finger|ftp|hg|http(|s)|news|tel)://[^ ]*"
+color body yellow black "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
+
+# Colour dates, both ISO-style and [YY]YY/MM/DD
+#color body brightred black "\(19|20\)?[0-9][0-9][/-][01]?[0-9][/-][0123]?[0-9]"
+
+# Threading ------------------------------------------------
+#set sort = threads
+
+# But not by subject alone
+#set strict_threads = yes
+
+# Don't collapse if there's an unread message
+#set collapse_unread = no
+
+# But do start with them collapsed
+#folder-hook . "exec collapse-all"
+
+# And sort threads by most recent message, not the first
+#set sort_aux=last-date-received
+
+# Rebind the key to collapse/expand threads
+#bind index , collapse-thread
+
+#set sort = 'threads'
+#set sort_aux = 'last-date-received'
+set imap_check_subscribed
+
+ignore "Authentication-Results:"
+ignore "DomainKey-Signature:"
+ignore "DKIM-Signature:"
+hdr_order Date From To Cc
+
+
+# Pager
+set pager_index_lines=4
+set pager_stop
+
+# Default simple search includes "to", "from" and "subject"
+set simple_search="~f %s | ~t %s | ~s %s"
+
+# Do not ask to include message in reply, instead just open VIM
+set include=yes
+
+bind pager G bottom# just like vi and less
+bind pager gg top# just like vi and less
+
+# To speedup address lookup
+#set edit_headers = yes
+#set autoedit
+
+# set index_format="%4C %Z %[%b %D] %-15.15L (%4l) %s" # original index format
+set index_format = "%4C\)  %{%d/%m/%y %R}  %-25.25L  %s"
+#set sort = reverse-date
+#set sort = threads
+#set sort_aux = reverse-last-date-received
+
+set help
+auto_view text/html
+#set sort_browser="reverse-date"
+#set sort_aux="last-date-received"
+#unset collapse_unread
+set sort = threads # like gmail
+set sort_aux = reverse-last-date-received # like gmail
+#unset sort_re # always thread
+
+set mail_check = 1 # check email every 1 min
+#set thorough_search # strip headers and eval mimes before searching
+#set thread_received # sort threads by date received, not sent
+set timeout = 3 # idle time before scanning
+set forward_format = "Fwd: %s" # format for subject when forwarding
+
+# composing mail
+  set askcc # always ask for CC:
+  set edit_headers # show headers when composing
+  set fast_reply # skip to compose when replying
+  set forward_quote # include message in forwards
+  set include # include message in replies
+  set realname = "Srikant Patnaik" # who am i?
+  set reply_to # reply to Reply-to: field, not From:
+  set reverse_name # reply as who it was sent to (see alternates)
+
+# headers to show
+ignore * # ignore all headers
+unignore from: to: cc: date: subject: # show only these
+hdr_order from: to: cc: date: subject: # and in this order
+
+# Sidebar Patch --------------------------------------
+#set sidebar_delim   = '  │'
+#set sidebar_visible = yes
+#set sidebar_width   = 28
+color sidebar_new color221 color233
+
+
+# set up the sidebar, default not visible
+set sidebar_width=25
+set sidebar_visible=yes
+set sidebar_delim='|'
+set sidebar_sort=no
+set sidebar_shortpath=yes# abbreviate folder names
+#set sidebar_newmail_only=yes# only show folders with new mail
+
+# color of folders with new mail
+color sidebar_new yellow default
+
+# ctrl-n, ctrl-p to select next, prev folder
+# ctrl-o to open selected folder
+bind index,pager \CP sidebar-prev
+bind index,pager \CN sidebar-next
+bind index,pager \CO sidebar-open
+
+macro index B '<enter-command>toggle sidebar_visible<enter><refresh>'
+macro pager B '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+macro index \cB '<enter-command>toggle sidebar_visible<enter><refresh>'
+macro pager \cB '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+
+# From http://upsilon.cc/~zack/blog/posts/2008/01/mutt_patched_key_bindings/
+color sidebar_new yellow default
