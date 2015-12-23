@@ -69,3 +69,11 @@ Install ``mutt-patched`` ::
 	sudo apt-get install mutt-patched
 
 Locate comments and settings in ``.muttrc`` file.
+
+
+External links
+--------------
+
+#. http://mutt.org
+
+#. http://www.muttrcbuilder.org/
