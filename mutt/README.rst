@@ -21,7 +21,8 @@ Add following content ::
 	set imap_pass="password"
 	set smtp_pass="password"
 
-Encrypt using GPG(GNU Privacy Guard) key ::
+Encrypt using GPG(GNU Privacy Guard) key (make sure you install 'gnupg-agent'
+first::
 
 	gpg --gen-key
 
@@ -70,6 +71,26 @@ Install ``mutt-patched`` ::
 
 Locate comments and settings in ``.muttrc`` file.
 
+
+Faster caching
+^^^^^^^^^^^^^^
+
+Create a RAM disk and mount it to any location. Typically a RAM disk can be used
+for any application data for faster access.
+
+Create a directory ::
+
+	mkdir /mnt/mutt-ramdisk
+
+Mount it with ``tmpfs`` ::
+
+	mount -t tmpfs -o size=200m tmpfs /mnt/mutt-ramdisk
+
+Now change your ``.muttrc`` with new header and message locations. See my muttrc
+in ``pwd``.
+
+It has a drawback too, upon restart the RAM disk will loose all its content.
+Hence, it will fetch again.
 
 External links
 --------------

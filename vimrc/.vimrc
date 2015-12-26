@@ -56,4 +56,3 @@ autocmd FileType mail set spell
 "For LanguageTool (Grammer checker)
 let g:languagetool_jar='/opt/LanguageTool-3.1/languagetool-commandline.jar'
 
-
