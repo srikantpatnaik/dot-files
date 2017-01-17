@@ -98,3 +98,5 @@ External links
 #. http://mutt.org
 
 #. http://www.muttrcbuilder.org/
+
+#. http://pablotron.org/files/muttrc

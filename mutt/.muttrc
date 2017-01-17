@@ -5,10 +5,10 @@ set imap_user = 'u.srikant.patnaik@gmail.com'
 #set sendmail="/usr/sbin/ssmtp"
 set sendmail="/usr/sbin/sendmail"
 
-set folder="imaps://imap.gmail.com"
-set spoolfile="imaps://imap.gmail.com/INBOX"
-set record="imaps://imap.gmail.com/[Gmail]/Sent Mail"
-set postponed="imaps://imap.gmail.com/[Gmail]/Drafts"
+#set folder="imaps://imap.gmail.com"
+#set spoolfile="imaps://imap.gmail.com/INBOX"
+#set record="imaps://imap.gmail.com/[Gmail]/Sent Mail"
+#set postponed="imaps://imap.gmail.com/[Gmail]/Drafts"
 
 set header_cache = "~/stuff/Mail/cache/headers"
 set message_cachedir = "~/stuff/Mail/cache/bodies"
@@ -34,38 +34,39 @@ set imap_keepalive= 900
 # Do not copy sent mail.  Gmail smtp already does this.
 set copy= no
 
-set folder= imaps://imap.gmail.com:993
-set spoolfile= +INBOX #or +[Gmail]/Important
-set postponed= +[Gmail]/Drafts
+#set folder= imaps://imap.gmail.com:993
+#set spoolfile= +INBOX #or +[Gmail]/Important
+#set postponed= +[Gmail]/Drafts
 
 # This is using the 'trash' patch.
-set trash= +[Gmail]/Trash
+#set trash= +[Gmail]/Trash
 
 
 # Gmail style keybindings
-bind  editor <space> noop
-bind  index,pager c  mail 		#Compose
-macro index,pager e  "<save-message>=[Gmail]/All Mail<enter><enter>" "Archive conversation"
-bind  generic     x  tag-entry #Select Conversation
-bind  index       x  tag-thread #Select Conversation
-bind  pager       x  tag-message #Select Conversation
-bind  index,pager s  flag-message #Start a message
-macro index,pager +  <save-message>=[Gmail]/Important<enter><enter> "Mark as important"
-macro index,pager !  <save-message>=[Gmail]/Spam<enter><enter> "Report spam"
-bind  index,pager \# delete-thread #Delete
-bind  index,pager l  copy-message #Label
-#bind  index,pager v  save-message #Move to
-macro index,pager I  <set-flag>O"Mark as read"
-macro index,pager U  <clear-flag>O"Mark as unread"
-macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>"enter"Go to all mail"
-macro index,pager gs <change-folder>=[Gmail]/Starred<enter>enter"Go to 'Starred'"
-macro index,pager gd <change-folder>=[Gmail]/Drafts<enter>enter"Go to 'Drafts'"
-macro index,pager gl <change-folder>?index"Go to 'Label'"
-macro index,pager gi <change-folder>=INBOX<enter>"Go to inbox"
-macro index,pager gt "<change-folder>=[Gmail]/Sent Mail<enter>"enter"Go to 'Sent Mail'"
-folder-hook +INBOX 'macro index,pager y "<save-message>=[Gmail]/AllMail<enter><enter>" "Archive conversation"'
-folder-hook +[Gmail]/Trash macro index,pager y <save-message>=INBOX<enter><enter> "Move to inbox"
-folder-hook +[Gmail]/Starred bind  index,pager y flag-message #"Toggle star"
+#bind  editor <space> noop
+#bind  index,pager c  mail 		#Compose
+#macro index,pager e  "<save-message>=[Gmail]/All Mail<enter><enter>" "Archive conversation"
+#macro index,pager e  "<save-message>=archive<enter><enter>" "Archive conversation"
+#bind  generic     x  tag-entry #Select Conversation
+#bind  index       x  tag-thread #Select Conversation
+#bind  pager       x  tag-message #Select Conversation
+#bind  index,pager s  flag-message #Start a message
+#macro index,pager +  <save-message>=[Gmail]/Important<enter><enter> "Mark as important"
+#macro index,pager !  <save-message>=[Gmail]/Spam<enter><enter> "Report spam"
+#bind  index,pager \# delete-thread #Delete
+#bind  index,pager l  copy-message #Label
+##bind  index,pager v  save-message #Move to
+#macro index,pager I  <set-flag>O"Mark as read"
+#macro index,pager U  <clear-flag>O"Mark as unread"
+#macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>"enter"Go to all mail"
+#macro index,pager gs <change-folder>=[Gmail]/Starred<enter>enter"Go to 'Starred'"
+#macro index,pager gd <change-folder>=[Gmail]/Drafts<enter>enter"Go to 'Drafts'"
+#macro index,pager gl <change-folder>?index"Go to 'Label'"
+#macro index,pager gi <change-folder>=INBOX<enter>"Go to inbox"
+#macro index,pager gt "<change-folder>=[Gmail]/Sent Mail<enter>"enter"Go to 'Sent Mail'"
+#folder-hook +INBOX 'macro index,pager y "<save-message>=[Gmail]/AllMail<enter><enter>" "Archive conversation"'
+#folder-hook +[Gmail]/Trash macro index,pager y <save-message>=INBOX<enter><enter> "Move to inbox"
+#folder-hook +[Gmail]/Starred bind  index,pager y flag-message #"Toggle star"
 
 # Normal keybindings, using 'g' conflicts with 'gi' and others
 bind  index,pager R  group-reply #Reply all
@@ -76,8 +77,8 @@ set to_chars= ' +>-<L'
 set move= no
 
 # Sort by newest conversation first.
-set sort= reverse-threads
-set sort_aux= last-date-received
+#set sort= reverse-threads
+#set sort_aux= last-date-received
 
 # For passwords ---------------------------------------
 source "gpg -d ~/.mutt/passwords.gpg |"
@@ -87,17 +88,18 @@ set query_command="goobook query %s"
 macro index,pager a "<pipe-message>goobook add<return>" "add sender to google contacts"
 bind editor <Tab> complete-query
 
+
 # Mutt color
 source $HOME/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-16.muttrc
 
 # Pager View Options ---------------------------------
-#set pager_index_lines = 10 # number of index lines to show
-#set pager_context = 3      # number of context lines to show
-#set pager_stop             # don't go to next message automatically
+set pager_index_lines = 8 # number of index lines to show
+set pager_context = 3      # number of context lines to show
+set pager_stop             # don't go to next message automatically
 #set menu_scroll            # scroll in menus
 #set tilde                  # show tildes like in vim
 #unset markers              # no ugly plus signs
-
+#set  pager_format="%S [%C] %n (%l) %s"
 #set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 #alternative_order text/plain text/enriched text/html
 
@@ -130,6 +132,9 @@ color body yellow black "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
 
 # Threading ------------------------------------------------
 set sort = threads
+# And sort threads by most recent message, not the first
+#set sort_aux=last-date-received
+set sort_aux = reverse-last-date-received # like gmail
 
 # But not by subject alone
 set strict_threads = yes
@@ -139,10 +144,6 @@ set collapse_unread = no
 
 # But do start with them collapsed
 folder-hook . "exec collapse-all"
-
-# And sort threads by most recent message, not the first
-#set sort_aux=last-date-received
-set sort_aux = reverse-last-date-received # like gmail
 
 # Rebind the key to collapse/expand threads
 bind index , collapse-thread
@@ -165,13 +166,15 @@ bind pager gg top# just like vi and less
 #set autoedit
 
 # set index_format="%4C %Z %[%b %D] %-15.15L (%4l) %s" # original index format
-set index_format = "%4C\)  %{%d/%m/%y %R}  %-25.25L  %s"
+set index_format = "%4C\) %Z %{%d/%m/%y %R}  %-25.25L  %s"
 
 set help
-auto_view text/html
+# This shows a urlview info at top of the mail (ugly?)
+auto_view text/html text/enriched application/x-gunzip application/postscript image/gif application/x-tar-gz
+alternative_order text/plain text/enriched text/html  # save html for last
 
-set mail_check = 1 # check email every 1 min
-#set thorough_search # strip headers and eval mimes before searching
+set mail_check = 3 # check email every 3 min
+set thorough_search # strip headers and eval mimes before searching
 #set thread_received # sort threads by date received, not sent
 set timeout = 3 # idle time before scanning
 set forward_format = "Fwd: %s" # format for subject when forwarding
@@ -196,18 +199,31 @@ hdr_order from: to: cc: date: subject: # and in this order
 # Taken from https://github.com/rbrito/dotfiles/blob/master/mutt/mutt-sidebar
 set sidebar_width=25
 set sidebar_visible=yes
-set sidebar_delim='|'
+#set sidebar_delim='|'
+set sidebar_delim='    '
 set sidebar_sort=no
 #set sidebar_shortpath=yes# abbreviate folder names
 #set sidebar_newmail_only=yes# only show folders with new mail
 
-# Mailboxes to show in the sidebar.
-mailboxes "+INBOX"\
-	  "+[Gmail]/All Mail"\
-	  "+[Gmail]/Starred"\
-          "+[Gmail]/Sent Mail"\
-	  "+[Gmail]/Drafts"\
-	  "+[Gmail]/Trash"\
+
+# Get the mail from offlineimap
+set folder = /home/srikant/stuff/Mail
+
+# Configure the mailboxes
+set spoolfile = "+Gmail/INBOX"
+set postponed = "+Gmail/drafts"
+
+# Mailboxes to show in the sidebar. It can also be done by sourcing the
+# ~/.mutt/mailboxes file, but I don't know how to sort them
+
+mailboxes "$HOME/stuff/Mail/Gmail/INBOX"\
+		  "$HOME/stuff/Mail/Gmail/archive"\
+		  "$HOME/stuff/Mail/Gmail/starred"\
+    	  "$HOME/stuff/Mail/Gmail/sent"\
+		  "$HOME/stuff/Mail/Gmail/drafts"\
+		  "$HOME/stuff/Mail/Gmail/trash"\
+	#	  "$HOME/stuff/Mail/Gmail/Sent Mail New"
+
 
 
 # color of folders with new mail
@@ -231,7 +247,50 @@ set sleep_time = 0 # be fast
 set smart_wrap
 
 # use very high $read_inc to speed up reading hcache'd maildirs
-folder-hook . 'set read_inc=10000'
+#folder-hook . 'set read_inc=10000'
 
 # use lower value for reading slower remote IMAP folders
-folder-hook ^imap 'set read_inc=100'
+#folder-hook ^imap 'set read_inc=100'
+
+# Get the list of mailboxes generated by offlineimap on sidebar
+#source ~/.mutt/mailboxes
+
+set beep_new
+
+# Keybinding VIM like :
+# https://github.com/wichtounet/dotfiles/blob/master/.bindings.muttrc
+
+# Index
+bind index l display-message
+bind index gg first-entry
+bind index G last-entry
+bind index h noop               # Disable h
+
+# Browser
+bind browser l select-entry
+bind browser L view-file
+bind browser gg first-entry
+bind browser G last-entry
+bind browser h exit
+
+# GMail like view
+macro index,pager ut <tag-thread><limit>~T<enter><tag-thread> "show only current thread"
+macro index,pager ua <limit>all<enter> "show everything"
+
+# Status Bar
+set status_chars  = " *%A"
+#set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+set status_format = "─────────%>────"
+
+macro  index  <F10>  "<pipe-message>~/tmp/viewhtmlmail\n" "View HTML in browser"
+macro  pager  <F10>  "<pipe-message>~/tmp/viewhtmlmail\n" "View HTML in  browser"
+
+#To avoid ugly line breaks in mutt
+set text_flowed=yes
+macro index,pager,attach gi "<change-folder>=Gmail/INBOX<enter>" "Go to inbox"
+macro index,pager,attach ga "<change-folder>=Gmail/archive<enter>" "Go to all mail"
+macro index,pager,attach gt "<change-folder>=Gmail/sent<enter>" "Go to sent mail"
+macro index,pager,attach gd "<change-folder>=Gmail/drafts<enter>" "Go to drafts"
+macro index,pager,attach gs "<change-folder>=Gmail/starred<enter>" "Go to starred"
+macro index,pager,attach gh "<change-folder>=Gmail].Trash<enter>" "Go to trash"
+
