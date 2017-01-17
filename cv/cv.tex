@@ -1,0 +1,281 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Two Column One Page Curriculum Vitae
+% LaTeX Template
+% Version 1.1 (24/1/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Alessandro (The CV Inn)
+% Modified by Srikant Patnaik
+%
+% IMPORTANT: THIS TEMPLATE NEEDS TO BE COMPILED WITH XeLaTeX
+%
+% This template uses several fonts not included with Windows/Linux by
+% default. If you get compilation errors saying a font is missing, find the line
+% on which the font is used and either change it to a font included with your
+% operating system or comment the line out to use the default font.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[10pt]{article} % Font size - 10pt, 11pt or 12pt
+
+%\usepackage[hmargin=1.25cm, vmargin=1.25cm]{geometry} % Document margins
+\usepackage[hmargin=1.25cm, vmargin=.25cm]{geometry} % Document margins
+
+\usepackage{marvosym} % Required for symbols in the colored box
+\usepackage{ifsym} % Required for symbols in the colored box
+
+\usepackage[usenames,dvipsnames]{xcolor} % Allows the definition of hex colors
+
+% Fonts and tweaks for XeLaTeX
+%\usepackage{fontspec,xltxtra,xunicode}
+%\defaultfontfeatures{Mapping=tex-text}
+%\setromanfont[Mapping=tex-text]{Hoefler Text} % Main document font
+%\setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Gill Sans} % Font for your name at the top
+%\setmonofont[Scale=MatchLowercase]{Andale Mono}
+
+% Colors for links, text and headings
+\usepackage{hyperref}
+\definecolor{linkcolor}{HTML}{506266} % Blue-gray color for links
+\definecolor{shade}{HTML}{F5DD9D} % Peach color for the contact information box
+\definecolor{text1}{HTML}{2b2b2b} % Main document font color, off-black
+\definecolor{headings}{HTML}{701112} % Dark red color for headings
+% Other color palettes: shade=B9D7D9 and linkcolor=A40000; shade=D4D7FE and linkcolor=FF0080
+
+\hypersetup{colorlinks,breaklinks, urlcolor=linkcolor, linkcolor=linkcolor} % Set up links and colors
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+% Headers and footers can be added with the \lhead{} \rhead{} \lfoot{} \rfoot{} commands
+% Example footer:
+%\rfoot{\color{headings} {\sffamily Last update: \today}. Typeset with Xe\LaTeX}
+
+\renewcommand{\headrulewidth}{0pt} % Get rid of the default rule in the header
+
+\usepackage{titlesec} % Allows creating custom \section's
+
+% Format of the section titles
+\titleformat{\section}{\color{headings}
+\scshape\Large\raggedright}{}{0em}{}[\color{black}\titlerule]
+
+\titlespacing{\section}{0pt}{0pt}{5pt} % Spacing around titles
+
+\begin{document}
+
+\color{text1} % Sets the default text color for the whole document to the color defined as 'text1'
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\par{\centering{\sffamily\Huge Srikant Patnaik}\\ % Your name
+%{\color{headings}\fontspec[Variant = 2]{Zapfino} Curriculum {Vit\fontspec[Variant = 3]{Zapfino}\ae}\\[15pt]\par} % Curriculum vitae text in the Zapfino font
+
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}[t]{0.5\textwidth} % Start the left-hand side of the page
+\vspace{0pt} % Trick for alignment
+
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE
+%----------------------------------------------------------------------------------------
+
+\section{Employment details}
+
+\smallskip
+{\raggedright\textit{Feb 2011 -- Mar 2017}\par}
+{\raggedright\large Software Manager, FOSSEE Project, \\
+Indian Institute of Technology, Bombay}\\
+\smallskip
+
+{\raggedright\textit{August 2009 -- Nov 2010}\par}
+{\raggedright\large Faculty in Electronics Technology, \\
+Loyola Academy, Hyderabad}\\
+\smallskip
+
+{\raggedright\textsc{May 2008 -- Jun 2009}\par}
+{\raggedright\large Freelancer Linux trainer and consultant, \\
+Part time, Indore \& Hyderabad}\\
+
+%----------------------------------------------------------------------------------------
+%	Projects
+%----------------------------------------------------------------------------------------
+\section{Projects}
+
+
+\textbf{\raggedright\large 8051 programmer for Linux}
+{\raggedleft\textit{(Oct 2008 - Feb 2013)}}\\
+
+A first open hardware and software programmer tool for Atmel 8051 based ISP
+microcontrollers. Written in C and can support other compatible devices as well.
+
+This software was popular until the USB based programmers
+stormed the market.
+\href{https://sourceforge.net/projects/linux-isp-89sxx/}{https://sourceforge.net/projects/linux-isp-89sxx}\\
+
+%----
+
+\textbf{\raggedright\large Dual boot on Aakash tablet} {\raggedleft\textit{(Jun 2011 - Mar 2013)}}\\
+
+An affordable tablet by MHRD, Govt. of India to enhance education in rural areas.\\
+Customized and ported Linux as secondary OS on 7" ARM tablet. It required device driver
+modifications, hardware debugging, and a touch optimized lightweight distribution.
+
+The pilot project has been tested with 1,00,000 devices.
+\href{http://aakashlabs.org/gnu}{http://aakashlabs.org/gnu}\\
+\href{https://github.com/androportal/linux-on-aakash}{https://github.com/androportal/linux-on-aakash}\\
+
+%---
+
+\textbf{\raggedright\large Programming on Android} {\raggedleft\textit{(May 2012 - Aug 2013)}}\\
+
+A programming environment with C, Cpp, Python and Scilab on Aakash Android tablet. \\
+Developed a tiny customized Linux chroot environment to bootstrap packages. A webapp was
+used for the frontend.
+
+The pilot project has been tested with 1,00,000 devices.
+\href{http://aakashlabs.org/ac/project/1}{http://aakashlabs.org/ac/project/1}\\
+\href{https://github.com/androportal/installer}{https://github.com/androportal/installer}\\
+
+%---
+
+\textbf{\raggedright\large FOSSEE Laptop} {\raggedleft\textit{(Feb 2013 - Aug
+2015)}}\\
+
+An affordable Linux based laptop for students with popular scientific and
+educational packages. \\
+The development started with reverse engineering the available setupbox
+Kernel source code. The display and audio drivers were patched to bring the
+basic linux running.
+
+The pilot project has been tested with 1,000 devices.
+
+\href{http://laptop.fossee.in}{http://laptop.fossee.in}\\
+%\href{https://github.com/FOSSEE/FOSSEE-netbook-kernel-source}{https://github.com/FOSSEE/FOSSEE-netbook-kernel-source}\\
+%---
+
+\textbf{\raggedright\large Debugging TRU64 server}
+{\raggedleft\textit{(May 2008)}}\\
+
+Worked with Crompton Greaves as a freelancer at Konkan railway to setup auto sync
+between Windows application server and old TRU64 Unix server. \\
+
+
+
+%----------------------------------------------------------------------------------------
+%	Left Hand size page end
+%----------------------------------------------------------------------------------------
+\end{minipage} % End the left-hand side of the page
+\hfill
+\begin{minipage}[t]{0.44\textwidth} % Start the right-hand side of the page
+\vspace{0pt} % Trick for alignment
+
+%----------------------------------------------------------------------------------------
+%	COLORED BOX
+%----------------------------------------------------------------------------------------
+
+\colorbox{shade}{\textcolor{text1}{
+\begin{tabular}{c|p{7cm}}
+\raisebox{-0.5pt}{\Lightning} & [Kolkata / Hyderabad / Remote]  16 Mar 2017  \\
+\raisebox{-1pt}{\Letter} &
+\href{mailto:srikant@@gnu-linux.org}{srikant@gnu-linux.org} \\ % Email address
+\raisebox{1pt}{\Mobilefone} & +91 900 499 6314 \\ % Phone number
+\raisebox{1pt}{\Keyboard} &
+\href{https://github.com/srikantpatnaik}{https://github.com/srikantpatnaik} \\ % Website
+\raisebox{-1pt}{\textifsymbol{18}} & 429, Tansa House, IIT Bombay \\ % Address
+\end{tabular}
+}
+}\\[10pt]
+
+
+%----------------------------------------------------------------------------------------
+%	Technology
+%----------------------------------------------------------------------------------------
+
+\section{Technologies Used}
+\textbf{\raggedright\large System \& Networks}\\
+kernel, bootloaders, efi, lxc, docker, iptables, routes, dns and web
+servers, load balancer, reverse-proxy, ssl certs, custom linux distros\\
+
+\textbf{\raggedright\large Web, Cloud \& DevOps}\\
+aws, digitalocean, docker on cloud, auto-scaling with
+swarm/kubernetes\footnote{in progress}, python
+web frameworks, ansible, jenkins, puppet \\
+
+\textbf{\raggedright\large Programming}\\
+c, shell scripting, perl, awk, sed, python (generally any language with 'if, else, for,
+while' except Java) \\
+
+\textbf{\raggedright\large Hardware \& IoT}\\
+serial debugging, microcontrollers , android \& Linux SBCs, IoT with esp8266 \& cloud
+publishing, server setup, networking \\
+
+
+%----------------------------------------------------------------------------------------
+% Learnings
+%----------------------------------------------------------------------------------------
+
+\section{Learning}
+
+\begin{tabular}{rl}
+
+\textsc{Academics}
+& M.Sc(electronics)\\
+
+\textsc{Past training}
+& Linux system administratoar,\\
+& Network administrator,\\
+& Linux kernel and device drivers,\\
+& Diploma electronics services, \\
+& Advanced embedded systems\\
+
+\textsc{In progress}
+& AWS certifications, \\
+& container orchestration, \\
+& network \& IT security\\ \\
+
+\end{tabular}
+
+%----------------------------------------------------------------------------------------
+% Role @ Present job
+%----------------------------------------------------------------------------------------
+
+\section{Role at FOSSEE, IIT Bombay}
+%\textbf{\raggedright\large Talks \& Workshops}\\
+Development, team management, deciding policies, tracking code \& documentation.
+Delivered talk \& workshops at GNUnify, FOSS.IN, icfoss, SciPy India and
+other events.\\
+
+%----------------------------------------------------------------------------------------
+% Interests
+%----------------------------------------------------------------------------------------
+
+\section{Interests}
+Film editing, audio mixing, world cinema, cartoons, comics, documentaries, table
+tennis, cricket. \\ \\
+Ocassionally blog at
+\href{https://gnu-linux.org}{https://gnu-linux.org} \\
+Videos \href{https://www.youtube.com/c/SrikantPatnaik}{https://www.youtube.com/c/SrikantPatnaik} \\
+
+%----------------------------------------------------------------------------------------
+% References and more
+%----------------------------------------------------------------------------------------
+
+\section{References}
+Please contact me for references and other details. \\
+
+
+%----------------------------------------------------------------------------------------
+
+\scriptsize This {\em cv} was generated on 18 Jan 2017. Check the latest at
+\href{https://github.com/srikantpatnaik/dot-files/cv}{https://github.com/srikantpatnaik/dot-files/cv}
+\end{minipage} % End right-hand side of the page
+
+\end{document}
