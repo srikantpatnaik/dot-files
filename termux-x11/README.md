@@ -31,9 +31,13 @@ essentially `X11` server.
 
 - `pkg install termux-x11-nightly`
 
-- `pkg install xfce4`
+- `pkg install xfce4 firefox`
+
+- Firefox is stable and doesn't crash during video calls.
 
 - `pkg install tur-repo`
+
+- *chromium* from tur repo is few release old and crashes during google meet.
 
 - `pkg install chromium`
 
@@ -53,11 +57,17 @@ essentially `X11` server.
 
 ## Starting X
 
+- `pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1 && sleep 3`
+
+- `export XDG_RUNTIME_DIR=${TMPDIR}`
+
 - `termux-x11 :1 -xstartup "dbus-launch --exit-with-session xfce4-session" -dpi 160`
 
 - `This setup has already GPU drivers needed for proper functioning
 
 ## Install additional packages (optional) [not working as of 20 Jul 2023]
+
+- `proot is slow, as it uses system traces, better approach will be using chroot`
 
 - `termux-setup-storage`
     
@@ -66,6 +76,8 @@ essentially `X11` server.
 - `proot-distro install debian`
 
 - `proot-distro login debian --shared-tmp`
+ 
+- [Reference](https://github.com/termux/termux-packages/issues/14039#issuecomment-1362460223)
 
 #### Run the following inside the debian 
 
