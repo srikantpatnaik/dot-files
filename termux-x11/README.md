@@ -61,9 +61,12 @@ essentially `X11` server.
 
 - `export XDG_RUNTIME_DIR=${TMPDIR}`
 
-- `termux-x11 :1 -xstartup "dbus-launch --exit-with-session xfce4-session" -dpi 160`
+- `termux-x11 :1 -xstartup "dbus-launch --exit-with-session xfce4-session" -dpi 180`
 
-- `This setup has already GPU drivers needed for proper functioning
+- This setup has already GPU drivers needed for proper functioning
+
+- Copy the theme directories to `.themes` from [here](https://github.com/EliverLara/Sweet/releases/tag/v3.0) 
+and [here](http://packages.linuxmint.com/pool/main/m/mint-themes/mint-themes_2.1.5.tar.xz)
 
 ## Install additional packages (optional) [not working as of 20 Jul 2023]
 
