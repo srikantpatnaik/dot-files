@@ -88,3 +88,14 @@ and [here](http://packages.linuxmint.com/pool/main/m/mint-themes/mint-themes_2.1
 
 - `apt update && apt install -y htop git pulseaudio vim terminator chromium`
 
+## Similar Projects
+
+- [halium](https://halium.org/)
+
+- [droidian xda](https://forum.xda-developers.com/t/rom-linux-lavender-droidian-bookworm.4536313/)
+
+- [droidian](https://droidian.org/)
+
+- [libhybris](https://github.com/libhybris/libhybris)
+
+- [ubports](https://devices.ubuntu-touch.io/installer/)
