@@ -24,7 +24,7 @@ overrides if prompted.
 
 ## Installing x11 
 
-- Use the nightly packages to install `termux-x11` android app, which is 
+- Use the nightly packages to install `termux-x11` [android app](https://github.com/termux/termux-x11/releases/), which is 
 essentially `X11` server.
 
 - `pkg install x11-repo`
@@ -68,7 +68,7 @@ essentially `X11` server.
 - Copy the theme directories to `.themes` from [here](https://github.com/EliverLara/Sweet/releases/tag/v3.0) 
 and [here](http://packages.linuxmint.com/pool/main/m/mint-themes/mint-themes_2.1.5.tar.xz)
 
-## Install additional packages (optional) [not working as of 20 Jul 2023]
+## proot (optional) [not working as of 20 Jul 2023]
 
 - `proot is slow, as it uses system traces, better approach will be using chroot`
 
@@ -87,6 +87,59 @@ and [here](http://packages.linuxmint.com/pool/main/m/mint-themes/mint-themes_2.1
 - `ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime`
 
 - `apt update && apt install -y htop git pulseaudio vim terminator chromium`
+
+
+## chroot (optional) 
+
+- Assuming you have `root` access, then obtain the `ssh` session or `adb` session to jumpstart
+
+- `pkg install tsu`
+
+- `wget https://kali.download/nethunter-images/current/rootfs/kalifs-arm64-minimal.tar.xz`
+
+- `sudo tar xpf kalifs-arm64-minimal.tar.xz --numeric-owner`
+
+- Copy the `chrootkali.sh` to the same directory as of `kali-arm64`
+
+- `su -s ./chrootkali.sh`
+
+- Inside the chroot run the following
+
+    ```
+    echo "nameserver 8.8.8.8" > /etc/resolv.conf
+    echo "127.0.0.1 localhost" > /etc/hosts
+    groupadd -g 3003 aid_inet
+    groupadd -g 3004 aid_net_raw
+    groupadd -g 1003 aid_graphics
+    usermod -g 3003 -G 3003,3004 -a _apt
+    usermod -G 3003 -a root
+    ln -ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+    groupadd storage
+    groupadd wheel
+    useradd -m -g users -G wheel,audio,video,storage -s /bin/bash sri
+    passwd sri
+    ```
+- Inside chroot add user to sudo group `user    ALL=(ALL:ALL) NOPASSWD:ALL` using `sudo visudo`
+
+- Exit chroot and change the `chrootkali.sh` to login using new user
+
+- `apt install -y vim net-tools sudo git xfce4 xfce4-goodies dbus-x11 chromium vlc`
+
+- Change `allowed_users = anybody` in `/etc/X11/Xwrapper.config`
+
+- Remove power manager or else X will fail `apt purge xfce4-power-manager`
+
+###
+
+- Start `termux-x11` in termux 
+
+    ```
+    TMPDIR=$PWD/kali-arm64/tmp XDG_RUNTIME_DIR=${TMPDIR} termux-x11 :2 -ac &
+    ```
+
+- `su -s ./chrootkali.sh` in termux
+
+- Inside chroot `DISPLAY=:2 MESA_LOADER_DRIVER_OVERRIDE=''  dbus-launch --exit-with-session startxfce4`
 
 ## Similar Projects
 
