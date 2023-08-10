@@ -31,7 +31,7 @@ essentially `X11` server.
 
 - `pkg install termux-x11-nightly`
 
-- `pkg install xfce4 firefox`
+- `pkg install xfce4 firefox pulseaudio`
 
 - Firefox is stable and doesn't crash during video calls.
 
@@ -116,7 +116,7 @@ and [here](http://packages.linuxmint.com/pool/main/m/mint-themes/mint-themes_2.1
     ln -ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
     groupadd storage
     groupadd wheel
-    useradd -m -g users -G wheel,audio,video,storage -s /bin/bash sri
+    useradd -m -g users -G wheel,audio,video,storage,inet,net_raw,sockets -s /bin/bash sri
     passwd sri
     ```
 - Inside chroot add user to sudo group `user    ALL=(ALL:ALL) NOPASSWD:ALL` using `sudo visudo`
@@ -129,17 +129,14 @@ and [here](http://packages.linuxmint.com/pool/main/m/mint-themes/mint-themes_2.1
 
 - Remove power manager or else X will fail `apt purge xfce4-power-manager`
 
-###
+### Starting Kali chroot
 
-- Start `termux-x11` in termux 
+- `./chrootkali.sh`
 
-    ```
-    TMPDIR=$PWD/kali-arm64/tmp XDG_RUNTIME_DIR=${TMPDIR} termux-x11 :2 -ac &
-    ```
+### Stopping Kali chroot
 
-- `su -s ./chrootkali.sh` in termux
+- `cntl + c` or `logout in Xfce`
 
-- Inside chroot `DISPLAY=:2 MESA_LOADER_DRIVER_OVERRIDE=''  dbus-launch --exit-with-session startxfce4`
 
 ## Similar Projects
 
