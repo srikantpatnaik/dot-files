@@ -31,7 +31,7 @@ essentially `X11` server.
 
 - `pkg install termux-x11-nightly`
 
-- `pkg install xfce4 firefox pulseaudio`
+- `pkg install xfce4 firefox pulseaudio virglrenderer-android`
 
 - Firefox is stable and doesn't crash during video calls.
 
@@ -57,16 +57,13 @@ essentially `X11` server.
 
 ## Starting X
 
-- `pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1 && sleep 3`
+- This setup has already GPU driver `virglrenderer-android` needed for proper functioning (test using webgl aquarium)
 
-- `export XDG_RUNTIME_DIR=${TMPDIR}`
-
-- `termux-x11 :1 -xstartup "dbus-launch --exit-with-session xfce4-session" -dpi 180`
-
-- This setup has already GPU drivers needed for proper functioning
+- `./default-x11.sh`
 
 - Copy the theme directories to `.themes` from [here](https://github.com/EliverLara/Sweet/releases/tag/v3.0) 
 and [here](http://packages.linuxmint.com/pool/main/m/mint-themes/mint-themes_2.1.5.tar.xz)
+
 
 ## proot (optional) [not working as of 20 Jul 2023]
 
@@ -123,7 +120,7 @@ and [here](http://packages.linuxmint.com/pool/main/m/mint-themes/mint-themes_2.1
 
 - Exit chroot and change the `chrootkali.sh` to login using new user
 
-- `apt install -y vim net-tools sudo git xfce4 xfce4-goodies dbus-x11 chromium vlc`
+- `apt install -y vim net-tools sudo git xfce4 xfce4-goodies dbus-x11 chromium vlc `
 
 - Change `allowed_users = anybody` in `/etc/X11/Xwrapper.config`
 

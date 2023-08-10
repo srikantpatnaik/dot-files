@@ -17,10 +17,12 @@ cleanall() {
 	killall pulseaudio 
 	rm -rf ~/.config/pulse/*
 	kill -9 $(pgrep -f termux.x11) 
+	kill -9 $(pgrep -f virgl_test)
 	umountchroot
 }
 
 hostscript() {
+	virgl_test_server_android &
 	pulseaudio --start --load="module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1" --exit-idle-time=-1
 	pacmd load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1 auth-anonymous=1
 	TMPDIR=$PWD/kali-arm64/tmp XDG_RUNTIME_DIR=${TMPDIR} termux-x11 :2 -ac &
@@ -36,10 +38,15 @@ mountchroot() {
 	su -c  mount --bind /sdcard $CHROOTPATH/sdcard
 }
 startchroot() {
-	su -c echo "sudo chmod 777 /dev/shm" > $CHROOTPATH/home/$user/startxfce.sh
-	su -c echo "export PULSE_SERVER=127.0.0.1 && pulseaudio --start --disable-shm=1 --exit-idle-time=-1" >> $CHROOTPATH/home/$user/startxfce.sh
-	su -c echo "DISPLAY=:2; MESA_LOADER_DRIVER_OVERRIDE=''; dbus-launch --exit-with-session startxfce4" >> $CHROOTPATH/home/$user/startxfce.sh
-	su -c chroot $CHROOTPATH /bin/su - $user "/home/sri/startxfce.sh"
+	echo "sudo chmod 777 /dev/shm" > startxfce.sh
+	echo "export PULSE_SERVER=127.0.0.1 && pulseaudio --start --disable-shm=1 --exit-idle-time=-1" >> startxfce.sh
+	#echo "DISPLAY=:2 GALLIUM_DRIVER=virpipe MESA_GL_VERSION_OVERRIDE=4.0 dbus-launch --exit-with-session startxfce4" >> startxfce.sh
+	echo "GALLIUM_DRIVER=virpipe MESA_GL_VERSION_OVERRIDE=4.0" >> startxfce.sh
+	echo "DISPLAY=:2 MESA_LOADER_DRIVER_OVERRIDE='' dbus-launch --exit-with-session startxfce4" >> startxfce.sh
+	su -c "mv -v startxfce.sh $CHROOTPATH/home/$user/"
+	su -c "cat $CHROOTPATH/home/$user/startxfce.sh"
+	su -c "chmod 777 $CHROOTPATH/home/$user/startxfce.sh"
+	su -c chroot $CHROOTPATH /bin/su - $user "/home/$user/startxfce.sh"
 }
 
 main() {
@@ -47,7 +54,6 @@ main() {
 	hostscript
 	mountchroot
 	startchroot
-	stopchroot
 	umountchroot
 	cleanall
 }
