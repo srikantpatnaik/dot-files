@@ -11,13 +11,13 @@ from [Github](https://github.com/termux/termux-app).
 overrides if prompted.
 
     ```
-    pkg update && pkg install dropbear
+    pkg update && pkg install openssh
     ```
 - Get the IP address, termux username with `ifconfig` and `whoami` commands. 
 
 - Similarly, set the password by `passwd` command. 
 
-- Now, start `SSH` service by executing `dropbear -R`.
+- Now, start `SSH` service by executing `sshd`.
 
 - Connect from your Linux machine with the above set credentials. 
 
@@ -52,8 +52,15 @@ essentially `X11` server.
 
     ```
     adb shell "/system/bin/device_config list activity_manager"
+    ```
+
+- Disable `Windows/Command` key
 
     ```
+    adb shell "settings put system is_custom_shortcut_effective 0"
+    ```
+- [Reference](https://github.com/CwithW/MiuiPadMeta)
+
 
 ## Starting X
 
@@ -65,7 +72,7 @@ essentially `X11` server.
 and [here](http://packages.linuxmint.com/pool/main/m/mint-themes/mint-themes_2.1.5.tar.xz)
 
 
-## proot (optional) [not working as of 20 Jul 2023]
+## proot (optional)
 
 - `proot is slow, as it uses system traces, better approach will be using chroot`
 
@@ -84,6 +91,10 @@ and [here](http://packages.linuxmint.com/pool/main/m/mint-themes/mint-themes_2.1
 - `ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime`
 
 - `apt update && apt install -y htop git pulseaudio vim terminator chromium`
+
+- Follow the next steps similar to `default-x11.sh`
+
+- [Reference](https://ivonblog.com/en-us/posts/termux-virglrenderer/)
 
 
 ## chroot (optional) 
@@ -110,7 +121,7 @@ and [here](http://packages.linuxmint.com/pool/main/m/mint-themes/mint-themes_2.1
     groupadd -g 1003 aid_graphics
     usermod -g 3003 -G 3003,3004 -a _apt
     usermod -G 3003 -a root
-    ln -ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+    ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
     groupadd storage
     groupadd wheel
     useradd -m -g users -G wheel,audio,video,storage,inet,net_raw,sockets -s /bin/bash sri
