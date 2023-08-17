@@ -3,7 +3,6 @@
 
 ## Setting up environment
 
-
 - Install `Termux` either from `F-Droid` or directly 
 from [Github](https://github.com/termux/termux-app).
 
@@ -61,6 +60,13 @@ essentially `X11` server.
     ```
 - [Reference](https://github.com/CwithW/MiuiPadMeta)
 
+- Remove the bottom gesture bar
+
+    ```
+    adb shell "settings put global hide_gesture_line 1"
+    ```
+
+- The settings command can also be done by `setedit` android app from playstore
 
 ## Starting X
 
