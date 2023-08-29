@@ -1,12 +1,11 @@
 # README
 
-
 ## Setting up environment
 
 - Install `Termux` either from `F-Droid` or directly 
 from [Github](https://github.com/termux/termux-app).
 
-- Install the `dropbear` package for quick `SSH`. Accept all default file
+- Install the `openssh` package for quick `SSH`. Accept all default file
 overrides if prompted.
 
     ```
@@ -72,7 +71,21 @@ essentially `X11` server.
 
 - This setup has already GPU driver `virglrenderer-android` needed for proper functioning (test using webgl aquarium)
 
+- For mic to work, add the following lines at the end of `../usr/etc/pulse/default.pa` file and comment the line for pulseaudio
+  in `default-11.sh`.
+
+  ```
+  load-module module-sles-source
+  load-module module-null-sink sink_name=virtspk sink_properties=device.description=Virtual_Speaker
+  ```
+
 - `./default-x11.sh`
+
+- When using direct touch option in termux-x11 preferences one can enable the same for Firefox by
+
+    ```
+    env MOZ_USE_XINPUT2=1 firefox
+    ```
 
 - Copy the theme directories to `.themes` from [here](https://github.com/EliverLara/Sweet/releases/tag/v3.0) 
 and [here](http://packages.linuxmint.com/pool/main/m/mint-themes/mint-themes_2.1.5.tar.xz)
