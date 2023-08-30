@@ -52,11 +52,16 @@ essentially `X11` server.
     adb shell "/system/bin/device_config list activity_manager"
     ```
 
-- Disable `Windows/Command` key
+- Disable `Windows/Command` key (not recommended though)
 
     ```
     adb shell "settings put system is_custom_shortcut_effective 0"
     ```
+
+- Press the `Command/Win` key twice to toggle between recent Android apps, then try
+  `Alt + Tab` in xfce to lock xfce bindings. `termux-X11` app preference should also
+  match.
+
 - [Reference](https://github.com/CwithW/MiuiPadMeta)
 
 - Remove the bottom gesture bar
@@ -65,7 +70,13 @@ essentially `X11` server.
     adb shell "settings put global hide_gesture_line 1"
     ```
 
-- The settings command can also be done by `setedit` android app from playstore
+- The settings command can also be done by `setedit` android app from playstore.
+
+- Give `setedit` app permission from adb 
+
+    ```
+    pm grant io.github.muntashirakon.setedit android.permission.WRITE_SECURE_SETTINGS
+    ```
 
 ## Starting X
 
