@@ -1,6 +1,6 @@
 # Steps to run postmarketOS on Xiaomi Pad 5 (nabu)
 
-**The steps below are taken from [xda member serdeliuk](https://forum.xda-developers.com/t/rom-postmarketos-linux-boot-on-xiaomi-pad-5-nabu.4454143/)
+**The steps below are taken from [xda member serdeliuk](https://forum.xda-developers.com/t/rom-postmarketos-linux-boot-on-xiaomi-pad-5-nabu.4454143/)**
 
 ## Install ADB on your host machine (I'm using GNU/Linux)
 
@@ -52,21 +52,66 @@
 22. Erase to prevent loading and interfering with with pmos `fastboot erase dtbo_b` ?
 
 23. Flash Linux Kernel to `slot b` boot region `fastboot flash boot_b boot.img`
+    (You may use alternate kernel from [here](https://forum.xda-developers.com/attachments/boot-img.5834319/) which contains 
+    `CONFIG_SCSI_UFS_BSG` for switching slots using `qbootctl`)
 
-24. Now flash prebuilt Alpine image (pmos) `fastboot flash pmos xiaomi-nabu.img`
+24. Now flash prebuilt Alpine image (pmos) `fastboot flash pmos xiaomi-nabu.img` 
 
-25. Default user is `user` and password is `147147` [details](https://forum.xda-developers.com/t/rom-postmarketos-linux-boot-on-xiaomi-pad-5-nabu.4454143/)
+25. Once done `fastboot reboot` to get into `KDE Desktop`.
 
-## An alpine on mipad5
+26. Default user is `user` and password is `147147` [details](https://forum.xda-developers.com/t/rom-postmarketos-linux-boot-on-xiaomi-pad-5-nabu.4454143/)
 
-1. Tune with `powertop`
+## Tuning the Plasma Desktop 
 
-2. Make USB receive more current on Linux
+1. Wait for the touch to work then perhaps use two fingers to swiftly click the session selector 
+   and change it to `Plasma X11`. The default `Wayland` session tend to crash the plasma-shell and it
+   also has touch issues (my feeling?).
 
-3. CPU powersave and DPMS when sleep
+2. Connect a bluetooth keyboard and mouse as soon as you login first time, now connect to Wifi, change the date to fetch from NTP
 
-4. Use GNOME with extension to make on screen keyboard automatically appear
+3. Change the system font size to 12 or so, increase the display scaling to 125%, and change the theme to Dark (as you may like)
 
+4. Create profile in Konsole and change the font, size, background etc 
+
+5. Change the sleep time to 1 min in power settings to save as much power as possible
+
+
+
+
+
+## Root any device (You must unlock the device first)
+
+1. Get the original factory firmware(android OS) for your region, in our case download 
+   the fastboot version from [here](https://xiaomifirmwareupdater.com/miui/nabu/)
+
+2. Extract the firmware and navigate to `images` directory. 
+
+3. `adb push boot.img /sdcard`
+
+4. Install `Magisk` from [here](https://github.com/topjohnwu/Magisk/releases)
+
+5. In the Magisk app click on the first install then do `select and patch a file` and patch
+
+6. Do `adb pull /storage/emulated/0/Download/magisk_patched-xxxx_xxxx.img`
+
+7. Restart device `adb reboot bootloader`
+
+8. `fastboot flash boot magisk_patched-xxxx_xxxx.img`
+
+9. `fastboot reboot` and done.
+   
+## Switch Slots
+
+### Android(slot A) to Linux(slot B)
+
+Install the APK from [here](https://github.com/gibcheesepuffs/Switch-My-Slot-Android/releases/tag/v0.7.1) and install the Magisk 
+module from [here](https://github.com/roihershberg/bootctl-binary/releases/tag/v2.2). Use the app to switch the slot.
+
+### Linux(slot B) to Android(slot A)
+
+1. `sudo apk add qbootctl`
+
+2. `sudo qbootctl -s a && sudo reboot`
 
 ## References
 
@@ -75,6 +120,8 @@
 * [Build Kernel](https://forum.xda-developers.com/t/rom-postmarketos-linux-boot-on-xiaomi-pad-5-nabu.4454143/post-88534869)
 
 * [Boot to Linux](https://github.com/gibcheesepuffs/Switch-My-Slot-Android)
+
+* [Android verified boot](https://wiki.postmarketos.org/wiki/Android_Verified_Boot_(AVB))
 
 * [Boot to Android](https://forum.xda-developers.com/t/rom-postmarketos-linux-boot-on-xiaomi-pad-5-nabu.4454143/post-88776459)
 
